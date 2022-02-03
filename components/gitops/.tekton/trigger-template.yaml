@@ -29,7 +29,7 @@ spec:
             value: Dockerfile
         pipelineRef:
           name: docker-build
-          bundle: quay.io/redhat-appstudio/build-templates-bundle:v0.1.4
+          bundle: quay.io/joejstuart/build-templates-bundle:latest
         workspaces:
           - name: workspace
             persistentVolumeClaim:
