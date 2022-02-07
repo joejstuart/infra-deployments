@@ -15,6 +15,10 @@ spec:
       kind: PipelineRun
       metadata:
         generateName: application-service-
+        annotations:
+          github.integrations.tekton.dev/commit: $(tt.params.git-revision)
+          github.integrations.tekton.dev/owner: joejstuart
+          github.integrations.tekton.dev/repo: infra-deployments
       spec:
         params:
           - name: git-url
@@ -28,8 +32,8 @@ spec:
           - name: dockerfile
             value: Dockerfile
         pipelineRef:
-          name: docker-build
-          bundle: quay.io/redhat-appstudio/build-templates-bundle:v0.1.4
+          name: basic-build
+          bundle: quay.io/joejstuart/build-templates-bundle:latest
         workspaces:
           - name: workspace
             persistentVolumeClaim:
