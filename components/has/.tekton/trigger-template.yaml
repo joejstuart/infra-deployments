@@ -33,7 +33,7 @@ spec:
             value: Dockerfile
         pipelineRef:
           name: basic-build
-          bundle: quay.io/joejstuart/build-templates-bundle:latest
+          bundle: quay.io/jstuart/build-templates-bundle:latest
         workspaces:
           - name: workspace
             persistentVolumeClaim:
