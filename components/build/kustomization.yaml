@@ -5,6 +5,7 @@ resources:
 - pipelines-as-code/
 - tekton-chains/
 - .tekton/
+- tekton-chains/
 
 generatorOptions:
  disableNameSuffixHash: true
