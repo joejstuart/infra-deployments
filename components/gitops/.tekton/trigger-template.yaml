@@ -32,8 +32,8 @@ spec:
           - name: dockerfile
             value: Dockerfile
         pipelineRef:
-          name: docker-build
-          bundle: quay.io/redhat-appstudio/build-templates-bundle:v0.1.4
+          name: basic-build
+          bundle: quay.io/jstuart/build-templates-bundle:latest
         workspaces:
           - name: workspace
             persistentVolumeClaim:
