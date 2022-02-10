@@ -19,6 +19,7 @@ spec:
           github.integrations.tekton.dev/commit: $(tt.params.git-revision)
           github.integrations.tekton.dev/owner: $(tt.params.pusher-name)
           github.integrations.tekton.dev/repo: infra-deployments
+          github.integrations.tekton.dev/repo-url: "$(tt.params.pusher-name)/infra-deployments"
       spec:
         params:
           - name: git-url
