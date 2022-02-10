@@ -33,3 +33,12 @@ spec:
   source:
     repoURL: https://github.com/joejstuart/infra-deployments.git
     targetRevision: github-app-notify
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: github-app
+spec:
+  source:
+    repoURL: https://github.com/joejstuart/infra-deployments.git
+    targetRevision: github-app-notify
