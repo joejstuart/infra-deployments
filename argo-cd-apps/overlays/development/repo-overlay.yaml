@@ -37,7 +37,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: github-app
+  name: github-notifier
 spec:
   source:
     repoURL: https://github.com/joejstuart/infra-deployments.git
