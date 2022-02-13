@@ -1,4 +1,4 @@
-### Github-app is an operator that watches taskRuns and reports the results back to Github.
+### Github-notifier is an operator that watches taskRuns and reports the results back to Github.
 
 #### Usage
 The operator watches all taskRuns on a cluster. When a taskRun completes,
