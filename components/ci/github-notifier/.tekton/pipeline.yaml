@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: tutorial-pipeline
+spec:
+  workspaces:
+    - name: workspace1 # Name of the workspace in the Pipeline
+  tasks:
+    - name: clone-repository
+      params:
+        - name: url
+          value: https://github.com/tektoncd/experimental.git
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: workspace1
+    - name: build-and-push-operator
+      taskRef:
+        kind: Task
+        name: build-operator-from-git-source
+      params:
+        - name: app-path
+          value: notifiers/github-app
+        - name: app-name
+          value: github-app
+      workspaces:
+        - name: output
+          workspace: workspace1
+      runAfter:
+        - clone-repository

@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-operator-from-git-source
+spec:
+  workspaces:
+    - name: output
+  params:
+    - name: app-path
+    - name: app-name
+  steps:
+    - name: build-and-push
+      image: golang:1.17
+      env:
+        - name: "KO_DOCKER_REPO"
+          value: "quay.io/jstuart"
+      script: |
+        cd "$(workspaces.output.path)/$(params.app-path)"
+        mkdir cmd/$(params.app-name)
+        mv cmd/main.go cmd/$(params.app-name)
+        go get github.com/google/ko
+        go get cloud.google.com/go/container/apiv1
+        go get cloud.google.com/go/monitoring/apiv3
+        go get cloud.google.com/go/trace/apiv2
+        /go/bin/ko publish -B ./cmd/$(params.app-name)
+
