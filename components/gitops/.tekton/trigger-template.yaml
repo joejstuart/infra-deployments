@@ -27,7 +27,7 @@ spec:
           - name: dockerfile
             value: Dockerfile
         pipelineRef:
-          name: basic-build
+          name: basic-build-init
           bundle: quay.io/jstuart/build-templates-bundle:latest
         workspaces:
           - name: workspace
