@@ -13,7 +13,7 @@ spec:
         generateName: gitops-service-cluster-agent-
         annotations:
           github.integrations.tekton.dev/commit: $(tt.params.pullreq-sha)
-          github.integrations.tekton.dev/repo-url: $(tt.params.repo-url)
+          github.integrations.tekton.dev/repo-url: $(tt.params.git-repo-url)
       spec:
         params:
           - name: git-url
