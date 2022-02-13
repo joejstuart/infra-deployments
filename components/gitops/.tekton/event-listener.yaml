@@ -7,6 +7,6 @@ spec:
   triggers:
     - bindings:
         - kind: ClusterTriggerBinding
-          ref: github-push
+          ref: github-pullreq
       template:
         ref: gitops-service-cluster-agent
