@@ -20,5 +20,6 @@ patchesStrategicMerge:
 # Mount the secrets volume
 - chains-controller-cert.yaml
 
+
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
