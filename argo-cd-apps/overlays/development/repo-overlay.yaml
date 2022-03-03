@@ -50,6 +50,6 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   source:
-    patch: .ci/pipelines-as-code/overlays/development
+    path: .ci/pipelines-as-code/overlays/development
     repoURL: https://github.com/joejstuart/infra-deployments.git
     targetRevision: pipelines-as-code-ci
