@@ -40,8 +40,9 @@ tkn task start kaniko-chains \
 title "Wait a few seconds for chains finalizers to complete"
 sleep 10
 
-# This will use cosign to verify the new build
-$SCRIPTDIR/kaniko-cosign-verify.sh
+tkn task start verify-attestation-signature \
+  --use-param-defaults \
+  --showlog
 
 pause
 
