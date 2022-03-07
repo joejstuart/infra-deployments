@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cosign-verify-image
+spec:
+  params:
+    - name: IMAGE_URL
+      type: string
+      description: The url to the image
+    - name: SIG_KEY
+      type: string
+      description: The url to the sig key
+      default: k8s://tekton-chains/signing-secrets
+    - name: VERBOSE
+      type: string
+      description: Used for extra debugging
+      default: ""
+  steps:
+    - name: cosign-verify
+      image: quay.io/redhat-appstudio/appstudio-utils:8bc9c0814143d8fb0c6a9be59227362e772624b5
+      script: |
+        #!/bin/bin/env bash
+        set -eu
+        COSIGN_EXPERIMENTAL=1 cosign verify $(params.VERBOSE) --key $(params.SIG_KEY) $(params.IMAGE_URL) -o json | jq
