@@ -6,10 +6,6 @@
 # Required
 IMAGE_URL=$1
 
-# If these are set we'll try to extract a secret and use it to login
-REGISTRY_SECRET=$2
-NAMESPACE=$3
-
 # Set this to use a different sig key. See below for the defaults.
 SIG_KEY=$COSIGN_SIG_KEY
 
@@ -33,27 +29,10 @@ if [[ -z $SIG_KEY ]]; then
   #SIG_KEY=$(git rev-parse --show-toplevel)/cosign.pub
 fi
 
-if [[ -n $REGISTRY_SECRET ]]; then
-  #
-  # Extract credentials for a docker login
-  # Question: Could podman be used instead?
-  #
-  if [[ -n $NAMESPACE ]]; then
-    REGISTRY_SECRET="$REGISTRY_SECRET -n $NAMESPACE"
-  fi
-
-  USER_PASS=$(
-    kubectl get secret $REGISTRY_SECRET -o json |
-      jq -r '.data[".dockerconfigjson"]' | base64 -d |
-        jq -r '.auths["quay.io"].auth' | base64 -d )
-
-  REGISTRY=$( echo $IMAGE_URL | cut -d/ -f1 )
-  REG_USER=$( echo "$USER_PASS" | cut -d: -f1 )
-  REG_PASS=$( echo "$USER_PASS" | cut -d: -f2 )
-
-  docker login -u $REG_USER -p $REG_PASS $REGISTRY
-fi
-
 # Now verify
-set -x
-COSIGN_EXPERIMENTAL=1 cosign verify $VERBOSE --key $SIG_KEY $IMAGE_URL -o json | jq
+tkn task start cosign-verify-image \
+--param IMAGE_URL=$IMAGE_URL \
+--param SIG_KEY=$SIG_KEY \
+--param VERBOSE=$COSIGN_VERBOSE \
+--use-param-defaults \
+--showlog
