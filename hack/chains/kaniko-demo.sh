@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source $(dirname $0)/_helpers.sh
-set -ue
 
 title "Suggested config for this demo:"
 $SCRIPTDIR/config.sh default --dry-run
@@ -47,4 +46,4 @@ tkn task start verify-attestation-signature \
 pause
 
 # This will use rekor-cli to verify the new build
-$SCRIPTDIR/rekor-verify-taskrun.sh
+#$SCRIPTDIR/rekor-verify-taskrun.sh
