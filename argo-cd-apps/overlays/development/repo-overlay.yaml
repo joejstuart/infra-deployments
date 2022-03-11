@@ -61,5 +61,5 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   source:
-    repoURL: https://github.com/redhat-appstudio/infra-deployments.git
+    repoURL: https://github.com/joejstuart/infra-deployments.git
     targetRevision: contract-devel
